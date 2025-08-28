@@ -2,24 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Reform UK Exposed Tweets by Area & Person</title>
+  <title>Reform UK Exposed Tweets by Area</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; background:#f5f5f5; color:#003b5c; }
-    header { background:#00aeef; padding:2rem 1rem 1rem; text-align:center; color:white; }
-    header h1 { margin:0; font-size:2.5rem; }
-    .subtext { margin-top:0.5rem; font-size:1rem; color:white; }
-    .subtext a { color:white; text-decoration:underline; }
-    .hero-image { width:100%; max-height:300px; object-fit:cover; margin-top:1rem; border-bottom:4px solid #003b5c; }
-    .container { max-width:900px; margin:2rem auto; padding:0 1rem; }
-    .filters { margin-bottom:1.5rem; }
-    label { font-weight:bold; display:block; margin-bottom:0.5rem; }
-    select, input[type="text"], input[list] { width:100%; padding:0.75rem; border:1px solid #ccc; border-radius:4px; font-size:1rem; }
-    .tweet { background:white; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.08); padding:1rem; margin-bottom:1rem; line-height:1.5; }
-    .tweet a { display:inline-block; margin-top:0.5rem; color:#00aeef; text-decoration:none; }
-    footer { text-align:center; color:#888; font-size:0.9rem; margin-top:3rem; padding-bottom:2rem; }
-    @media (max-width:700px) { header h1 { font-size:2rem; } }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -27,6 +13,7 @@
       background: #f5f5f5;
       color: #003b5c;
     }
+
     header {
       background: #00aeef;
       padding: 2rem 1rem 1rem;
@@ -34,19 +21,23 @@
       color: white;
       position: relative;
     }
+
     header h1 {
       margin: 0;
       font-size: 2.5rem;
     }
+
     .subtext {
       margin-top: 0.5rem;
       font-size: 1rem;
       color: white;
     }
+
     .subtext a {
       color: white;
       text-decoration: underline;
     }
+
     .hero-image {
       width: 100%;
       max-height: 300px;
@@ -54,19 +45,23 @@
       margin-top: 1rem;
       border-bottom: 4px solid #003b5c;
     }
+
     .container {
       max-width: 900px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
+
     .filters {
       margin-bottom: 1.5rem;
     }
+
     label {
       font-weight: bold;
       display: block;
       margin-bottom: 0.5rem;
     }
+
     select, input[type="text"] {
       width: 100%;
       padding: 0.75rem;
@@ -74,6 +69,7 @@
       border-radius: 4px;
       font-size: 1rem;
     }
+
     .tweet {
       background: white;
       border-radius: 8px;
@@ -82,12 +78,14 @@
       margin-bottom: 1rem;
       line-height: 1.5;
     }
+
     .tweet a {
       display: inline-block;
       margin-top: 0.5rem;
       color: #00aeef;
       text-decoration: none;
     }
+
     footer {
       text-align: center;
       color: #888;
@@ -95,6 +93,7 @@
       margin-top: 3rem;
       padding-bottom: 2rem;
     }
+
     @media (max-width: 700px) {
       header h1 {
         font-size: 2rem;
@@ -107,36 +106,22 @@
   <header>
     <h1>Reform UK Exposed Tweets</h1>
     <div class="subtext">
-      Tweets from <strong>Reform UK Exposed</strong>, organised by area and candidate.<br />
-      Are you a local campaigner looking for information about your local Reform candidates? These are tweets from the brilliant <strong>Reform UK Exposed</strong> Twitter account, organised by geography and candidate.
+      Are you a local campaigner looking for information about your local Reform candidates? These are tweets from the brilliant <strong>Reform UK Exposed</strong> Twitter account, organised by geography.
       <br />
       Follow the original account <a href="https://twitter.com/ReformExposed" target="_blank">here</a>.
     </div>
-    <img class="hero-image"
-         src="https://i2-prod.mirror.co.uk/incoming/article5660503.ece/ALTERNATES/s1200/Election.jpg"
-         alt="Satirical image of Nigel Farage crying">
-    <img class="hero-image" src="https://i2-prod.mirror.co.uk/incoming/article5660503.ece/ALTERNATES/s1200/Election.jpg" alt="Satirical image of Nigel Farage crying">
+    <img class="hero-image" src="https://samkriss.com/wp-content/uploads/2013/05/image_update_cdaea1042c69cad5_1364011137_9j-4aaqsk.jpeg" alt="Satirical image of Nigel Farage crying">
+    <!-- Replace with your preferred image URL or local image -->
   </header>
 
   <div class="container">
     <div class="filters">
-      <!-- TYPEAHEAD AREA INPUT -->
-      <label for="areaInput">Filter by Area:</label>
-      <input list="areaList" id="areaInput" placeholder="Start typing an area..." />
-      <datalist id="areaList"></datalist>
       <label for="areaSelect">Filter by Area:</label>
       <select id="areaSelect">
         <option value="">All Areas</option>
       </select>
-
-      <!-- PERSON DROPDOWN -->
-      <label for="personSelect" style="margin-top:1rem;">Filter by Person:</label>
-      <select id="personSelect">
-        <option value="">All People</option>
-      </select>
     </div>
 
-    <div style="margin-bottom:1.5rem;">
     <div style="margin-bottom: 1.5rem;">
       <label for="searchInput">Search tweets:</label>
       <input type="text" id="searchInput" placeholder="Enter keyword..." />
@@ -150,38 +135,10 @@
   </footer>
 
   <script>
-    const sheetURL = 'https://docs.google.com/spreadsheets/d/e/.../pub?gid=0&single=true&output=csv';
     const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQyOqn4w0KNNgwXjXBam72jKvAmFwr3RUQEHjYEFhUq8gTwZqwuNSStbT-4SELNDNoT7taAgIXC66E2/pub?gid=0&single=true&output=csv';
     let allData = [];
 
     async function loadCSV(url) {
-      const res    = await fetch(url);
-      const text   = await res.text();
-      const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
-
-      return parsed.data.map(row => {
-        let persons = [];
-        if (row["all_persons"]) {
-          try {
-            const arr = JSON.parse(row["all_persons"].replace(/'/g, '"'));
-            persons = arr.map(o => o.name.trim());
-          } catch {}
-        }
-        return {
-          area:    row["Area"]?.trim(),
-          persons,          // array of names
-          tweet:   row["Tweet"]?.trim(),
-          url:     row["URL"]?.trim()
-        };
-      }).filter(d => d.area && d.tweet);
-    }
-
-    function populateDataList(listId, items) {
-      const dl = document.getElementById(listId);
-      items.sort().forEach(val => {
-        const opt = document.createElement("option");
-        opt.value = val;
-        dl.appendChild(opt);
       const res = await fetch(url);
       const text = await res.text();
 
@@ -191,22 +148,14 @@
       });
 
       const cleaned = parsed.data.map(row => ({
-        area:   row["Area"]?.trim(),
-        person: row["Person"]?.trim(),   // ← new Person field
-        tweet:  row["Tweet"]?.trim(),
-        url:    row["URL"]?.trim()
+        area: row["Area"]?.trim(),
+        tweet: row["Tweet"]?.trim(),
+        url: row["URL"]?.trim()
       })).filter(d => d.area && d.tweet);
 
       return cleaned;
     }
 
-    function populateSelect(id, items) {
-      const sel = document.getElementById(id);
-      items.sort().forEach(val => {
-        const opt = document.createElement("option");
-        opt.value = val;
-        opt.textContent = val;
-        sel.appendChild(opt);
     function populateDropdown(id, items) {
       const select = document.getElementById(id);
       items.sort().forEach(value => {
@@ -218,30 +167,17 @@
     }
 
     function applyFilters() {
-      const areaVal   = document.getElementById('areaInput').value.trim();
-      const person    = document.getElementById('personSelect').value;
-      const term      = document.getElementById('searchInput').value.toLowerCase();
-      const out       = document.getElementById('tweets');
-      out.innerHTML   = '';
-      const area       = document.getElementById('areaSelect').value;
-      const person     = document.getElementById('personSelect').value;
+      const area = document.getElementById('areaSelect').value;
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      const tweetsDiv  = document.getElementById('tweets');
+      const tweetsDiv = document.getElementById('tweets');
       tweetsDiv.innerHTML = '';
 
       const filtered = allData.filter(d => {
-        const okArea   = !areaVal   || d.area.toLowerCase().startsWith(areaVal.toLowerCase());
-        const okPerson = !person    || d.persons.includes(person);
-        const okTerm   = !term      || d.tweet.toLowerCase().includes(term);
-        return okArea && okPerson && okTerm;
-        const matchesArea   = !area   || d.area   === area;
-        const matchesPerson = !person || d.person === person;
-        const matchesSearch = !searchTerm || d.tweet.toLowerCase().includes(searchTerm);
-        return matchesArea && matchesPerson && matchesSearch;
+        const matchesArea = area === '' || d.area === area;
+        const matchesSearch = searchTerm === '' || d.tweet.toLowerCase().includes(searchTerm);
+        return matchesArea && matchesSearch;
       });
 
-      if (!filtered.length) {
-        out.innerHTML = "<p>No tweets match your filters.</p>";
       if (filtered.length === 0) {
         tweetsDiv.innerHTML = "<p>No tweets match your filters.</p>";
         return;
@@ -251,35 +187,21 @@
         const div = document.createElement("div");
         div.className = "tweet";
         div.innerHTML = `
-          <strong>${d.persons.join(', ')}</strong><br>
-          <strong>${d.person}</strong><br>
           ${d.tweet}
           ${d.url ? `<br><a href="${d.url}" target="_blank">View on Twitter</a>` : ''}
         `;
-        out.appendChild(div);
         tweetsDiv.appendChild(div);
       });
     }
 
     async function init() {
       allData = await loadCSV(sheetURL);
-
-      const areas  = [...new Set(allData.map(d => d.area))].filter(Boolean);
-      const people = [...new Set(allData.flatMap(d => d.persons))].filter(Boolean);
-      const uniqueAreas   = [...new Set(allData.map(d => d.area))].filter(Boolean);
-      const uniquePeople  = [...new Set(allData.map(d => d.person))].filter(Boolean);
-
-      populateDataList('areaList', areas);
-      populateSelect('personSelect', people);
+      const uniqueAreas = [...new Set(allData.map(d => d.area).filter(Boolean))];
       populateDropdown('areaSelect', uniqueAreas);
-      populateDropdown('personSelect', uniquePeople);
 
-      document.getElementById('areaInput').addEventListener('input', applyFilters);
       document.getElementById('areaSelect').addEventListener('change', applyFilters);
-      document.getElementById('personSelect').addEventListener('change', applyFilters);
       document.getElementById('searchInput').addEventListener('input', applyFilters);
 
-      applyFilters();
       applyFilters(); // initial render
     }
 
